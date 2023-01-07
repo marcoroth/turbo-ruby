@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "example-gem", "~> 1.0"
 
   spec.add_dependency "phlex", "~> 1.0"
+  spec.add_dependency "phlex-rails", "~> 0.4"
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 end
