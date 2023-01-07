@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 module Turbo
   module Elements
     class TurboStream < Phlex::HTML
       register_element :turbo_stream
 
-      def initialize(view_context: nil, action: nil, target: nil, content: nil, allow_inferred_rendering: true, attributes: {}, **rendering, &block)
+      def initialize(view_context: nil, action: nil, target: nil, content: nil, allow_inferred_rendering: true,
+                     attributes: {}, **rendering, &block)
         @view_context = view_context
         @action = action
         @target = target
@@ -28,26 +31,25 @@ module Turbo
       end
 
       def render_template(&block)
-        case
-        when @content
+        if @content
           @allow_inferred_rendering ? (render_record(@content) || @content) : @content
-        when block_given?
+        elsif block_given?
           throw "no view_context error" if @view_context.nil?
           @view_context.capture(&block)
-        when @rendering.any?
+        elsif @rendering.any?
           throw "no view_context error" if @view_context.nil?
-          @view_context.render(formats: [ :html ], **@rendering)
-        when @allow_inferred_rendering
+          @view_context.render(formats: [:html], **@rendering)
+        elsif @allow_inferred_rendering
           render_record(@target)
         end
       end
 
       def render_record(possible_record)
-        if possible_record.respond_to?(:to_partial_path)
-          throw "no view_context error" if @view_context.nil?
-          record = possible_record
-          @view_context.render(partial: record, formats: :html)
-        end
+        return unless possible_record.respond_to?(:to_partial_path)
+
+        throw "no view_context error" if @view_context.nil?
+        record = possible_record
+        @view_context.render(partial: record, formats: :html)
       end
     end
   end

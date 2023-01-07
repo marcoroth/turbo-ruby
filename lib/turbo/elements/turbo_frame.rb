@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Turbo
   module Elements
     class TurboFrame < Phlex::HTML
@@ -5,4 +7,3 @@ module Turbo
     end
   end
 end
-
