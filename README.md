@@ -30,7 +30,9 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ### Partials
 
-<%= render Turbo::Elements::TurboStream.new(action: "morph", target: "post_1", partial: "posts/post", locals: { post: @post } %>
+```html+erb
+<%= render Turbo::Elements::TurboStream.new(action: "morph", target: "post_1", view_context: self, partial: "posts/post", locals: { post: @post } %>
+```
 
 ## Development
 
