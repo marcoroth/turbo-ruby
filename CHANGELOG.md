@@ -1,5 +1,3 @@
-## [Unreleased]
+## Changelog
 
-## [0.1.0] - 2023-01-06
-
-- Initial release
+Please see [GitHub](https://github.com/marcoroth/turbo-ruby/releases) for detailed changelogs.
