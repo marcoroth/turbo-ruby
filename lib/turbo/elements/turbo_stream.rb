@@ -7,6 +7,7 @@ module Turbo
 
       def initialize(view_context: nil, action: nil, target: nil, content: nil, allow_inferred_rendering: true,
                      attributes: {}, **rendering, &block)
+        super
         @view_context = view_context
         @action = action
         @target = target

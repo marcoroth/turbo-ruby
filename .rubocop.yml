@@ -11,5 +11,20 @@ Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
 
+Style/Documentation:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 10
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
 Layout/LineLength:
   Max: 120

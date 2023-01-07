@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Turbo
   module Ruby
     module Helpers
@@ -5,8 +7,18 @@ module Turbo
         self.class.action(...)
       end
 
-      def self.action(name, target, content = nil, view_context: nil, allow_inferred_rendering: true, attributes: {}, **rendering, &block)
-        TurboStreamElement.new(action: name, target: target, content: content, view_context: view_context, allow_inferred_rendering: allow_inferred_rendering, attributes: attributes, **rendering, &block)
+      def self.action(name, target, content = nil, view_context: nil, allow_inferred_rendering: true, attributes: {},
+                      **rendering, &block)
+        TurboStreamElement.new(
+          action: name,
+          target: target,
+          content: content,
+          view_context: view_context,
+          allow_inferred_rendering: allow_inferred_rendering,
+          attributes: attributes,
+          **rendering,
+          &block
+        )
       end
 
       def action_all(...)
@@ -17,8 +29,8 @@ module Turbo
         # ...
       end
 
-      def self.turbo_stream_action_tag(action, target: nil, template: nil, **attributes, &block)
-        TurboStreamElement.new(action: action, target: target, attributes: attributes, &block).to_html
+      def self.turbo_stream_action_tag
+        # ...
       end
 
       def self.turbo_frame_tag
