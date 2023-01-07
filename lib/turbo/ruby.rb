@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "phlex"
-require "phlex-rails"
 
 require_relative "ruby/version"
 require_relative "ruby/helpers"

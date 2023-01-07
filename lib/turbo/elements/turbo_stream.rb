@@ -7,7 +7,6 @@ module Turbo
 
       def initialize(view_context: nil, action: nil, target: nil, content: nil, allow_inferred_rendering: true,
                      attributes: {}, **rendering, &block)
-        super
         @view_context = view_context
         @action = action
         @target = target
@@ -51,6 +50,10 @@ module Turbo
         throw "no view_context error" if @view_context.nil?
         record = possible_record
         @view_context.render(partial: record, formats: :html)
+      end
+
+      def to_html
+        call
       end
     end
   end
