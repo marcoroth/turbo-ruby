@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    turbo-ruby (0.1.0)
+    turbo-ruby (0.1.1)
       phlex (~> 1.0)
 
 GEM
