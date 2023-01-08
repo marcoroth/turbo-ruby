@@ -29,9 +29,9 @@ module Turbo
       # turbo.morph(@posts) or turbo.morph(@post)
       def stream(records, **options, &block)
         if records.respond_to?(:each)
-          super(targets: records, view_context: view_context, **options, &block)
+          super(targets: records, **options, &block)
         else
-          super(target: records, view_context: view_context, **options, &block)
+          super(target: records, **options, &block)
         end
       end
 
@@ -48,6 +48,8 @@ module Turbo
       class Targets
         include Turbo::Ruby.registered_stream_actions
 
+        attr_reader :context
+
         def initialize(context, targets)
           @context = context
           @targets = targets.map { context.to_dom_id(_1) }
@@ -58,12 +60,14 @@ module Turbo
         end
 
         def stream(**options, &block)
-          super(targets: @targets, view_context: @context.view_context, **options, &block)
+          super(targets: @targets, **options, &block)
         end
       end
 
       class Target
         include Turbo::Ruby.registered_stream_actions
+
+        attr_reader :context
 
         def initialize(context, target)
           @context = context
@@ -75,7 +79,7 @@ module Turbo
         end
 
         def stream(**options, &block)
-          super(target: @target, view_context: @context.view_context, **options, &block)
+          super(target: @target, **options, &block)
         end
       end
     end

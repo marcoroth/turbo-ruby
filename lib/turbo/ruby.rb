@@ -17,9 +17,14 @@ module Turbo
         end
       end
 
-      def stream(**options, &block)
-        Turbo::Elements::TurboStream.new(**options, &block)
+      def stream(view_context: view_context, **options, &block)
+        Turbo::Elements::TurboStream.new(view_context: view_context, **options, &block)
       end
+
+      def context
+        self
+      end
+      delegate :view_context, to: :context
     end
 
     class << self
