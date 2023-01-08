@@ -56,6 +56,10 @@ module Turbo
       def to_html
         call
       end
+
+      def to_s
+        call
+      end
     end
   end
 end
