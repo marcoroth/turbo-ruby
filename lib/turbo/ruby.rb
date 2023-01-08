@@ -37,6 +37,9 @@ module Turbo
       register :log, "console_log"
     end
   end
+
+  # Make `Turbo.morph` etc. and `Turbo.stream` available.
+  include Ruby.registered_stream_actions
 end
 
 require_relative "railtie" if defined?(Rails::Railtie)

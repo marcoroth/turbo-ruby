@@ -18,21 +18,19 @@ In order to use `turbo-ruby` in Rails with the Rails `render` method you have to
 
 ```ruby
 # Ruby
-Turbo::Elements::TurboStream.new(action: "console_log", message: "Hello World").to_html
+Turbo.stream(action: "console_log", message: "Hello World").to_html
 ```
 
 ```html+erb
 <!-- Rails -->
-<%= render Turbo::Elements::TurboStream.new(action: "console_log", message: "Hello World") %>
+<%= render Turbo.stream(action: "console_log", message: "Hello World") %>
 ```
-
-
 
 ### Blocks
 
 ```ruby
 # Ruby
-Turbo::Elements::TurboStream.new(action: "morph", target: "post_1") do
+Turbo.stream(action: "morph", target: "post_1") do
   %(<div id="post_id">
       <h1>Post 1</h1>
     </div>)
@@ -41,11 +39,44 @@ end.to_html
 
 ```html+erb
 <!-- Rails -->
-<%= render Turbo::Elements::TurboStream.new(action: "morph", target: "post_1") do %>
+<%= render Turbo.stream(action: "morph", target: "post_1") do %>
   <div id="post_id">
     <h1>Post 1</h1>
   </div>
 <% end %>
+```
+
+### Registering custom stream actions
+
+It's also possible to register custom stream actions:
+
+```ruby
+Turbo::Ruby.stream_actions do
+  # Can either register via the shorthand helper:
+  register :morph
+
+  def log(message, **options, &block)
+    stream(action: "console_log", message: message, **options, &block)
+  end
+
+  # Or define a custom action that must convert any positional arguments into the
+  # appropriate keyword arguments and must call `stream`.
+  def custom_action(*arguments, **options, &block)
+    stream(**options, &block)
+  end
+end
+```
+
+Now the examples from above can be:
+
+```ruby
+Turbo.log("Hello world").to_html
+
+Turbo.morph target: "post_1" do
+  %(<div id="post_id">
+    <h1>Post 1</h1>
+  </div>)
+end.to_html
 ```
 
 ### Partials (Rails only)
