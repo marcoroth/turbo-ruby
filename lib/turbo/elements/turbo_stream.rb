@@ -5,11 +5,12 @@ module Turbo
     class TurboStream < Phlex::HTML
       register_element :turbo_stream
 
-      def initialize(view_context: nil, action: nil, target: nil, content: nil, allow_inferred_rendering: true,
-                     attributes: {}, **rendering, &block)
+      def initialize(view_context: nil, action: nil, target: nil, targets: nil, content: nil,
+                     allow_inferred_rendering: true, attributes: {}, **rendering, &block)
         @view_context = view_context
         @action = action
         @target = target
+        @targets = targets
         @content = content
         @allow_inferred_rendering = allow_inferred_rendering
         @attributes = attributes
@@ -20,7 +21,7 @@ module Turbo
       def template(&block)
         content = render_template(&block)
 
-        turbo_stream action: @action, target: @target, **@attributes do
+        turbo_stream action: @action, target: @target, targets: @targets, **@attributes do
           if @block || content
             template_tag do
               unsafe_raw content if content
