@@ -10,17 +10,37 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
     $ gem install turbo-ruby
 
-## Usage
+## Note: Usage in Rails
+
+In order to use `turbo-ruby` in Rails with the Rails `render` method you have to install the `phlex-rails` gem in your app. 
 
 ### Regular Element
 
+```ruby
+# Ruby
+Turbo::Elements::TurboStream.new(action: "console_log", message: "Hello World").to_html
+```
+
 ```html+erb
+<!-- Rails -->
 <%= render Turbo::Elements::TurboStream.new(action: "console_log", message: "Hello World") %>
 ```
 
+
+
 ### Blocks
 
+```ruby
+# Ruby
+Turbo::Elements::TurboStream.new(action: "morph", target: "post_1") do
+  %(<div id="post_id">
+      <h1>Post 1</h1>
+    </div>)
+end.to_html
+```
+
 ```html+erb
+<!-- Rails -->
 <%= render Turbo::Elements::TurboStream.new(action: "morph", target: "post_1") do %>
   <div id="post_id">
     <h1>Post 1</h1>
@@ -28,9 +48,10 @@ If bundler is not being used to manage dependencies, install the gem by executin
 <% end %>
 ```
 
-### Partials
+### Partials (Rails only)
 
 ```html+erb
+<!-- Rails -->
 <%= render Turbo::Elements::TurboStream.new(action: "morph", target: "post_1", view_context: self, partial: "posts/post", locals: { post: @post } %>
 ```
 
