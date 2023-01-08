@@ -34,7 +34,10 @@ module Turbo
 
     stream_actions do
       register :morph
-      register :log, "console_log"
+
+      def log(message, **options, &block)
+        stream(action: "console_log", message: message, **options, &block)
+      end
     end
   end
 
