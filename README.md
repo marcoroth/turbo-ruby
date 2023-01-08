@@ -12,7 +12,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Note: Usage in Rails
 
-In order to use `turbo-ruby` in Rails with the Rails `render` method you have to install the `phlex-rails` gem in your app. 
+In order to use `turbo-ruby` in Rails with the Rails `render` method you have to install the `phlex-rails` gem in your app.
 
 ### Regular Element
 
@@ -52,7 +52,7 @@ end.to_html
 
 ```html+erb
 <!-- Rails -->
-<%= render Turbo::Elements::TurboStream.new(action: "morph", target: "post_1", view_context: self, partial: "posts/post", locals: { post: @post } %>
+<%= render turbo.morph(@post, partial: "posts/post") %>
 ```
 
 ## Development
