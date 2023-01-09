@@ -26,6 +26,7 @@ module Turbo
             template_tag do
               unsafe_raw content if content
               unsafe_raw @block.call if @block
+              unsafe_raw block.call if block_given?
             end
           end
         end
