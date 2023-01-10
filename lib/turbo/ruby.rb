@@ -110,4 +110,4 @@ module Turbo
   end
 end
 
-require_relative "railtie" if defined?(Rails::Railtie)
+require_relative "ruby/railtie" if defined?(Rails::Railtie)
