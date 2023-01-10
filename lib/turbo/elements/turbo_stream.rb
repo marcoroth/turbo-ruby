@@ -39,7 +39,7 @@ module Turbo
           @view_context.capture(&block)
         elsif @rendering.any?
           throw "no view_context error" if @view_context.nil?
-          @view_context.render(formats: [:html], **@rendering)
+          @view_context.render(formats: [:html], object: @target, **@rendering)
         elsif @allow_inferred_rendering
           render_record(@target)
         end
